@@ -16,7 +16,7 @@
                 <div>
                     Tags:
                     {% for tag_ in question.tags.all %}
-                        <a href="#" class="refs mr-1">{{ tag_ }}</a>
+                        <a href="{% url 'tag' tag=tag_ %}" class="p-2">{{ tag_ }}</a>
                     {% endfor %}
                 </div>
             </div>
