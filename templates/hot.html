@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3 class="pb-3 mb-4 font-italic border-bottom">
+    <a class="p-4 refs" href="{% url 'index' %}"> New Questions</a>
+    Hot Questions
+    </h3>
+    {% for question in page_obj %}
+        {% include 'inc/question.html' %}
+    {% endfor %}
+    {% include 'inc/pagination.html' %}
+{% endblock content %}

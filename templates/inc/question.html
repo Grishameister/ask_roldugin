@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="contatiner border rounded mb-4">
+    <div class="row">
+        <div class="col-1">
+            <input class="mr-3 ml-1 mt-1 pl-2 likescountform" value="{{ question.likes }}" type="number">
+        </div>
+        <div class="col mb-1">
+            <a  class="refs" href="{% url 'question' qid=question.id %}">{{ question.title }}</a>
+            <p class="mt-1">{{ question.text }}</p>
+            <div>
+                <a class="refs-ans mr-4" href="{% url 'question' qid=question.id %}">Answers({{ question.answers }})</a>
+                Tags:
+                {% for tag_ in question.tags.all %}
+                    <a href="{% url 'tag' tag=tag_ %}" class="p-2">{{ tag_ }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
