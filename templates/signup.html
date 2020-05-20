@@ -1,34 +1,25 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
     <h3 class="pb-3 mb-4 font-italic border-bottom">
     Registration
     </h3>
-    <h5 class="error">
-        Sorry, this email address allready register.
-    </h5>
-    <form class="mb-3">
+    <form method="POST" enctype="multipart/form-data" class="mb-3">
+        {% csrf_token %}
+
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputlogin">Login</label>
-                <input type="text" class="form-control" id="inputlogin" placeholder="loginlogout">
+                {{ form.username|as_crispy_field }}
             </div>
             <div class="form-group col-md-6">
-                <label for="inputemail">Email</label>
-                <input type="email" class="form-control" id="inputemail" placeholder="loginlogout@mail.ru">
+                {{ form.email|as_crispy_field }}
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4">
+            {{ form.password|as_crispy_field }}
         </div>
         <div class="form-group">
-            <label for="inputPassword">Repeat password</label>
-            <input type="password" class="form-control" id="inputPassword">
-        </div>
-        <div class="form-group">
-            <label for="inputnick">Nickname</label>
-            <input type="text" class="form-control" id="inputnick" placeholder="grishameister">
+            {{ form.confirm_password|as_crispy_field }}
         </div>
         <div class="input-group mb-3">
             <div class="custom-file">

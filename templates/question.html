@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 
     <div class="contatiner mb-4 border-bottom">
@@ -25,5 +26,13 @@
     {% for answer in page_obj %}
         {% include 'inc/answer.html' %}
     {% endfor %}
+    {% if user.is_authenticated %}
+        <hr>
+        <form class="mb-4" method="POST">
+            {% csrf_token %}
+            {{ form.text|as_crispy_field }}
+            <button type="submit" class="btn btn-primary">Answer!</button>
+        </form>
+    {% endif %}
     {% include 'inc/pagination.html' %}
 {% endblock content %}

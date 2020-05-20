@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <h3 class="pb-3 mb-4 border-bottom">Profile: {{ user.username }}</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username|as_crispy_field }}
+        </div>
+        
+        <div class="form-group">
+            {{ form.email|as_crispy_field }}
+        </div>
+
+        <div class="form-group">
+            {{ form.password|as_crispy_field }}
+        </div>
+        <div>
+            <img src="{% static 'img/default.png' %}" class="rounded mx-0 d-block mb-3" style="max-width: 200px;">
+            {{ form.avatar|as_crispy_field }}
+        </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+{% endblock content %}

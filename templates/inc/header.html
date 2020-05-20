@@ -5,14 +5,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a class="navbar-brand col-7" href="{% url 'index' %}">SprosiAboutProblem</a>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="🔍Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            
+            <button onclick="location.href = '{% url 'ask' %}';" class="btn btn-outline-success my-2">Ask</button>
+            
         </div>
+        {% if user.is_authenticated %}
+        <div>
+            {{ user.username }}
+        </div>
+        <div>
+            <a class="col-1 refs" href="{% url 'profile' %}">Profile</a>
+            <a class="col-1 refs" href="{% url 'logout' %}">Log out</a>
+        </div>
+        {% else %}
         <div>
             <a class="col-1 refs" href="{% url 'login' %}" >Log in</a>
             <a class="col-1 refs" href="{% url 'signup' %}">Register</a>
         </div>
+        {% endif %}
     </nav>
 </header>
