@@ -13,12 +13,20 @@ class LoginForm(forms.Form):
 		if ' ' in username:
 			raise forms.ValidationError("Whitespaces")
 		try:
-			user = User.objects.filter(username=username).first
+			user = User.objects.filter(username=username).get()
 		except User.DoesNotExist:
 			raise forms.ValidationError("User doesn't exist")
 		return username
 
-
+	def clean_password(self):
+		username = self.cleaned_data.get("username")
+		if not username:
+			raise forms.ValidationError("User doesn't exist")
+		password = self.cleaned_data["password"]
+		user = User.objects.filter(username=username).get()
+		if not user.check_password(password):
+			raise forms.ValidationError("Wrong password")
+		return password
 
 
 class QuestionForm(forms.ModelForm):
@@ -90,10 +98,8 @@ class SettingsForm(forms.Form):
 		username = self.cleaned_data["username"]
 		if ' ' in username:
 			raise forms.ValidationError("Whitespaces")
-		try:
-			user = User.objects.filter(username=username).first
-		except User.DoesNotExist:
-			raise forms.ValidationError("User doesn't exist")
+		if User.objects.filter(username=username):
+			raise forms.ValidationError("username exists")
 		return username
 
 	def clean_email(self):
